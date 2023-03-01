@@ -1,1 +1,87 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,400;0,700;1,200&display=swap');
+@import './assets/styles/vars';
+
+:root {
+  --primary-color: rebeccapurple;
+  --primary-color: #8b307f;
+  --purple-red-color: #790c5a;
+  --light-color: #f1d4d4;
+
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+li {
+
+  font-family: 'Poppins', sans-serif;
+}
+
+a {
+  all: unset;
+}
+
+.panel {
+  display: flex;
+  background-color: rebeccapurple;
+  color: white;
+  width: 100vw;
+  padding: 1rem 2rem;
+  align-items: center;
+  justify-content: space-between;
+
+
+  .panel__content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+
+@media screen and (max-width: 900px) {
+  .panel {
+    padding: 0.5rem 1rem;
+  }
+}

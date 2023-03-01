@@ -1,0 +1,30 @@
+@import '../../../assets/styles/vars';
+
+header {
+  max-height: 80px;
+}
+
+.header__title {
+  font-size: clamp(18px, 4.8vw, 32px);
+  font-weight: 700;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+}
+
+.header__caption {
+  cursor: pointer;
+}
+
+.header__caption a {
+  height: 56px;
+  display: flex;
+  align-items: center;
+
+  img {
+    height: 100%;
+    width: auto;
+    object-fit: fill;
+  }
+}

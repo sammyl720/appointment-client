@@ -1,0 +1,23 @@
+form>div {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem;
+  flex-wrap: wrap;
+
+  input {
+    width: 100%;
+  }
+}
+
+form {
+  padding: 1rem;
+  border: 1px solid rgba(102, 51, 153, 0.26);
+  border-radius: 8px;
+  margin: 1rem auto;
+  max-width: clamp(60vw, 800px, 96vw);
+  box-shadow: 1px 1px 12px -6px rgba(0, 0, 0, 0.3);
+  background-color: lighten(rebeccapurple, $amount: 70);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4px, 1.5vh, 24px);
+}

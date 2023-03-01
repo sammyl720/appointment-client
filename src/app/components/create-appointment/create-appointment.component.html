@@ -1,0 +1,37 @@
+<form [formGroup]="createAppointmentForm" (ngSubmit)="createAppointment()">
+  <mat-form-field appearance="fill" [floatLabel]="'auto'">
+    <mat-label>First Name</mat-label>
+    <input matInput formControlName="firstName" matInput placeholder="First Name">
+    <mat-error *ngIf="controlIsInvalid('firstName')"> First name should be at least 3 characters long </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill" [floatLabel]="'auto'">
+    <mat-label>Last Name</mat-label>
+    <input matInput formControlName="lastName" matInput placeholder="Last Name">
+    <mat-error *ngIf="controlIsInvalid('lastName')"> Last name should be at least 3 characters long </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill" [floatLabel]="'auto'">
+    <mat-label>E-Mail Address</mat-label>
+    <input matInput formControlName="email" matInput placeholder="example@gmail.com">
+    <mat-icon matSuffix>email</mat-icon>
+    <mat-error *ngIf="controlIsInvalid('email')"> Please enter a valid email address </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Phone number</mat-label>
+    <input matInput formControlName="phone" matInput placeholder="Phone number*">
+    <mat-icon matSuffix>phone</mat-icon>
+    <mat-error *ngIf="controlIsInvalid('phone')"> Please enter a valid phone number </mat-error>
+    <mat-hint>Include area code</mat-hint>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Select time</mat-label>
+    <mat-select formControlName="time">
+      <mat-option *ngFor="let slot of openAppointments.slots" [value]="slot.time">
+        <div class="slot-time">{{slot.time}}</div>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button [disabled]="createAppointmentForm.invalid" type="submit" mat-fab extended color="primary">
+    Schedule
+    <mat-icon>schedule</mat-icon>
+  </button>
+</form>
