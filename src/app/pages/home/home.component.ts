@@ -1,8 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { filter, Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { filter, map, Observable } from 'rxjs';
 import { AppointmentService } from 'src/app/services/appointment/appointment.service';
-import { IAppointmentsAvailable, isProperApiValue } from 'src/app/types/api.types';
+import { IAppointmentsAvailable, IAppointmentsEvent, IEvent, IEventDetails, isProperApiValue } from 'src/app/types/api.types';
 
 @Component({
   selector: 'app-home',
@@ -12,14 +13,23 @@ import { IAppointmentsAvailable, isProperApiValue } from 'src/app/types/api.type
 export class HomeComponent {
 
   appointmentsAvaliable$: Observable<IAppointmentsAvailable>;
-
-  fetchedAvailable$: Observable<IAppointmentsAvailable | HttpErrorResponse>;
+  eventDetails$: Observable<IEvent>;
+  appointmentContext$: Observable<IAppointmentsEvent>;
 
   constructor(
-    public appointmentService: AppointmentService
+    public appointmentService: AppointmentService,
+    private activatedRoute: ActivatedRoute
   ) {
-
-    this.fetchedAvailable$ = appointmentService.getAvaliableAppoinments();
-    this.appointmentsAvaliable$ = this.fetchedAvailable$.pipe(filter((value): value is IAppointmentsAvailable => isProperApiValue<IAppointmentsAvailable>(value)));
+    this.appointmentsAvaliable$ = this.activatedRoute.data.pipe(
+      map(data => data['available']),
+      filter(app => !!app)
+    );
+    this.eventDetails$ = this.activatedRoute.data.pipe(
+      map(data => data['event']),
+      filter(e => !!e)
+    );
+    this.appointmentContext$ = this.activatedRoute.data.pipe(
+      map(data => ({ event: data['event'], available: data['available'] }))
+    );
   }
 }

@@ -15,8 +15,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EditComponent } from './pages/edit/edit.component';
-
+import { LoadingComponent } from './components/loading/loading.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,8 @@ import { EditComponent } from './pages/edit/edit.component';
     LayoutComponent,
     HomeComponent,
     CreateAppointmentComponent,
-    EditComponent
+    EditComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +42,10 @@ import { EditComponent } from './pages/edit/edit.component';
     MatInputModule,
     MatIconModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatExpansionModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

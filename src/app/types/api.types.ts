@@ -45,3 +45,36 @@ export function isProperApiValue<T>(value: T | HttpErrorResponse): value is T {
   }
   return false;
 }
+
+export interface IAppointmentsEvent {
+  event: IEvent;
+  available: IAppointmentsAvailable;
+}
+export interface IEvent {
+  event: IEventDetails;
+}
+export interface IEventDetails {
+  title: string;
+  description?: string;
+  date: Date | null;
+  startingTime: string;
+  endingTime: string;
+  affilates: string[];
+  location: ILocation;
+}
+
+export interface ILocation {
+  name: string;
+  shortName?: string;
+  address: string;
+  coordinates?: ICoordinates;
+}
+
+export interface ICoordinates {
+  longitude: number;
+  latitude: number;
+}
+
+export interface IEventService {
+  get: () => Promise<IEventDetails>;
+}

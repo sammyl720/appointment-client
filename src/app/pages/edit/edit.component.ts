@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, Observable } from 'rxjs';
-import { IAppointment } from 'src/app/types/api.types';
+import { IAppointment, IAppointmentsAvailable } from 'src/app/types/api.types';
 
 @Component({
   selector: 'app-edit',
@@ -10,6 +10,7 @@ import { IAppointment } from 'src/app/types/api.types';
 })
 export class EditComponent {
   appointment$: Observable<IAppointment>;
+  available$: Observable<IAppointmentsAvailable>;
 
   constructor(
     private router: Router,
@@ -17,6 +18,11 @@ export class EditComponent {
   ) {
     this.appointment$ = this.activatedRoute.data.pipe(
       map(data => data['appointment']),
+      filter(app => !!app)
+    )
+
+    this.available$ = this.activatedRoute.data.pipe(
+      map(data => data['available']),
       filter(app => !!app)
     )
   }

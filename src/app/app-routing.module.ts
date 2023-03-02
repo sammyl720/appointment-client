@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { EditAppointmentGuard } from './guards/edit-appointment.guard';
 import { EditComponent } from './pages/edit/edit.component';
 import { AppointmentResolver } from './resolvers/appointment.resolver';
+import { AvailableAppointmentsResolver } from './resolvers/available-appointments.resolver';
+import { EventResolver } from './resolvers/event.resolver';
 
 const routes: Routes = [
   {
@@ -10,7 +12,9 @@ const routes: Routes = [
     component: EditComponent,
     canActivate: [EditAppointmentGuard],
     resolve: {
-      appointment: AppointmentResolver
+      appointment: AppointmentResolver,
+      available: AvailableAppointmentsResolver,
+      event: EventResolver
     }
   },
   {
