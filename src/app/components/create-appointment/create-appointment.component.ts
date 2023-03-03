@@ -2,6 +2,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HotToastService, ObservableSuccessOrError, ValueOrFunction } from '@ngneat/hot-toast';
+import { Content } from '@ngneat/overview';
+import { catchError, filter, of } from 'rxjs';
 import { AppointmentService } from 'src/app/services/appointment/appointment.service';
 import { IAppointment, IAppointmentsAvailable, ICreateAppointment } from 'src/app/types/api.types';
 import { TIME_SLOT } from 'src/app/types/fields';
@@ -25,7 +28,8 @@ export class CreateAppointmentComponent {
   constructor(
     private fb: FormBuilder,
     private appointmentService: AppointmentService,
-    private router: Router
+    private router: Router,
+    private toastService: HotToastService
   ) {
 
   }
@@ -39,14 +43,30 @@ export class CreateAppointmentComponent {
   createAppointment() {
     if (this.createAppointmentForm.valid) {
       const appointment: ICreateAppointment = this.createAppointmentForm.getRawValue() as ICreateAppointment;
-      this.appointmentService.createAppointment(appointment).subscribe(response => {
-        if (response instanceof HttpErrorResponse) {
-          alert(JSON.stringify(response))
-        }
-        else {
+      this.appointmentService.createAppointment(appointment).
+        pipe(
+          catchError(error => {
+            if (error instanceof HttpErrorResponse) {
+              if (error.status >= 400 && error.status < 500) {
+                this.toastService.error(error.error?.reason ?? 'Something went wrong', { duration: 15000, dismissible: true })
+              }
+              else {
+                this.toastService.error('Something went wrong', { duration: 15000, dismissible: true });
+              }
+            }
+            return of(null);
+          }),
+          filter((response): response is IAppointment => !!response)
+        )
+        .subscribe((response) => {
+          const { firstName, lastName, email } = response;
+          const messageStr = `Great ${firstName} ${lastName}! We're sending your appointment details to ${email} now`;
+          this.toastService.success(messageStr, {
+            duration: 10000,
+            dismissible: true
+          })
           this.router.navigate([response._id])
-        }
-      })
+        })
     }
     else {
       console.log('invalid form');

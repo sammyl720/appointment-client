@@ -1,6 +1,33 @@
 <div class="container">
   <div class="home-content" *ngIf="(appointmentContext$ | async) as context; else loading">
-    <button (click)="toggleFormInView()">toggle</button>
+    <div class="event-details-wrapper" *ngIf="context.event?.event as event; else noEvent;">
+      <div [class.--hide-details]="showForm" class="event-details">
+        <h1>{{event.title}}</h1>
+        <div class="event-location">
+          <div class="event-location-text">
+            <p>
+              Our next blood drive will be at
+            </p>
+          </div>
+          <address>
+            <span class="address-name">
+              {{ event.location.name }}
+            </span>
+            <br />
+            {{ event.location.address }}
+          </address>
+        </div>
+        <time [dateTime]="event.date">
+          On {{ event.date | date : 'fullDate' }} <br />
+          Between {{ event.startingTime }}PM and {{ event.endingTime }}PM
+        </time>
+        <p>You can now schedule a blood donation appointment online</p>
+        <button class="schedule-btn" (click)="toggleFormInView()" [color]="'primary'" mat-fab extended>
+          Schedule Now
+          <mat-icon>schedule</mat-icon>
+        </button>
+      </div>
+    </div>
     <ng-container *ngIf="!!(context.event?.event) && !!(context.available.appointmentsLeft);">
       <div (click)="toggleFormInView()" [class.--show-backdrop]="showForm" class="form-backdrop">
       </div>
@@ -13,6 +40,9 @@
       </div>
     </ng-container>
   </div>
+  <ng-template #noEvent>
+    <h4>No Event</h4>
+  </ng-template>
   <ng-template #loading>
     <app-loading></app-loading>
   </ng-template>

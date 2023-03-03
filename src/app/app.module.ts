@@ -20,6 +20,7 @@ import { EditComponent } from './pages/edit/edit.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
+import { HotToastModule } from '@ngneat/hot-toast';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     MatProgressSpinnerModule,
     MatExpansionModule,
-    MatCardModule
+    MatCardModule,
+    HotToastModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

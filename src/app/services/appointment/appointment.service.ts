@@ -20,8 +20,8 @@ export class AppointmentService {
     return wrapError(this.httpClient.get<IAppointmentsAvailable>(this.apiUrl));
   }
 
-  createAppointment(appointment: ICreateAppointment): Observable<IAppointment | HttpErrorResponse> {
-    return wrapError(this.httpClient.post<IAppointment>(this.apiUrl, appointment));
+  createAppointment(appointment: ICreateAppointment): Observable<IAppointment> {
+    return this.httpClient.post<IAppointment>(this.apiUrl, appointment)
   }
 
   getAppointment(appointmentId: string) {

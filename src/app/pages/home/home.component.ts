@@ -11,23 +11,13 @@ import { IAppointmentsAvailable, IAppointmentsEvent, IEvent, IEventDetails, isPr
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  showForm = true;
-  appointmentsAvaliable$: Observable<IAppointmentsAvailable>;
-  eventDetails$: Observable<IEvent>;
+  showForm = false;
   appointmentContext$: Observable<IAppointmentsEvent>;
 
   constructor(
     public appointmentService: AppointmentService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.appointmentsAvaliable$ = this.activatedRoute.data.pipe(
-      map(data => data['available']),
-      filter(app => !!app)
-    );
-    this.eventDetails$ = this.activatedRoute.data.pipe(
-      map(data => data['event']),
-      filter(e => !!e)
-    );
     this.appointmentContext$ = this.activatedRoute.data.pipe(
       map(data => ({ event: data['event'], available: data['available'] }))
     );
