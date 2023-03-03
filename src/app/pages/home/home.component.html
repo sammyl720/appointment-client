@@ -1,7 +1,16 @@
 <div class="container">
   <div class="home-content" *ngIf="(appointmentContext$ | async) as context; else loading">
+    <button (click)="toggleFormInView()">toggle</button>
     <ng-container *ngIf="!!(context.event?.event) && !!(context.available.appointmentsLeft);">
-      <app-create-appointment [openAppointments]="context.available"></app-create-appointment>
+      <div (click)="toggleFormInView()" [class.--show-backdrop]="showForm" class="form-backdrop">
+      </div>
+      <div [class.--show-form]="showForm" class="create-form-wrapper">
+        <div (click)="toggleFormInView()" class="close-button">
+          <mat-icon>close</mat-icon>
+        </div>
+        <app-create-appointment [openAppointments]="context.available">
+        </app-create-appointment>
+      </div>
     </ng-container>
   </div>
   <ng-template #loading>

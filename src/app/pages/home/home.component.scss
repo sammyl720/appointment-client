@@ -1,0 +1,68 @@
+:host {
+  display: block;
+  position: relative;
+  height: 100%;
+}
+
+.form-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  $color: rgba(rebeccapurple, 0.8);
+  background-image: linear-gradient(rebeccapurple,
+      lighten(rebeccapurple, $amount: 5) 10%,
+      lighten(rebeccapurple, $amount: 10),
+      lighten(rebeccapurple, $amount: 20),
+      lighten(rebeccapurple, $amount: 10),
+      lighten(rebeccapurple, $amount: 5) 90%,
+      rebeccapurple);
+  height: 100%;
+  opacity: 0;
+  transition: opacity 300ms;
+  z-index: -1;
+
+  &.--show-backdrop {
+    opacity: 1;
+    pointer-events: initial;
+    z-index: 0;
+  }
+
+}
+
+.create-form-wrapper {
+  transform: translateY(150%);
+  transition: 300ms ease-in;
+  max-width: clamp(60vw, 800px, 96vw);
+  margin: 1rem auto;
+
+  .close-button {
+    background: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -2.5rem;
+    right: 0;
+    cursor: pointer;
+    box-shadow: 1px 1px 12px -6px rgba(255, 255, 255, 0.4);
+
+    ::ng-deep {
+      .mat-icon {
+        font-weight: 800;
+        color: rebeccapurple;
+      }
+    }
+  }
+
+  &.--show-form {
+    transform: translate(0);
+  }
+}
+
+.container {
+  height: 100%;
+  padding-block: 24px;
+}

@@ -24,6 +24,6 @@ export class EditComponent {
     this.available$ = this.activatedRoute.data.pipe(
       map(data => data['available']),
       filter(app => !!app)
-    )
+    );
   }
 }

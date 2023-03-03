@@ -11,7 +11,7 @@ import { IAppointmentsAvailable, IAppointmentsEvent, IEvent, IEventDetails, isPr
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-
+  showForm = true;
   appointmentsAvaliable$: Observable<IAppointmentsAvailable>;
   eventDetails$: Observable<IEvent>;
   appointmentContext$: Observable<IAppointmentsEvent>;
@@ -31,5 +31,9 @@ export class HomeComponent {
     this.appointmentContext$ = this.activatedRoute.data.pipe(
       map(data => ({ event: data['event'], available: data['available'] }))
     );
+  }
+
+  toggleFormInView() {
+    this.showForm = !this.showForm;
   }
 }
