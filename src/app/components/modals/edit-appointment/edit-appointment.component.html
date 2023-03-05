@@ -1,0 +1,23 @@
+<div class="dialog-wrapper">
+  <h3 mat-dialog-title>Change Appointment Time</h3>
+  <mat-dialog-content>
+    <mat-form-field appearance="fill">
+      <mat-label>Select time</mat-label>
+      <mat-select [ngModel]="selectedValue" (selectionChange)="onTimeUpdate($event)">
+        <ng-container *ngFor="let slot of data.available">
+          <mat-option [value]="slot.time">
+            {{slot.time}}
+          </mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>
+      Cancel
+    </button>
+    <button [disabled]="shouldDisable" mat-button color="primary" [mat-dialog-close]="selectedValue">
+      Update
+    </button>
+  </mat-dialog-actions>
+</div>

@@ -9,7 +9,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreateAppointmentComponent } from './components/create-appointment/create-appointment.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,6 +21,10 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
 import { HotToastModule } from '@ngneat/hot-toast';
+import { CancelAppointmentComponent } from './components/modals/cancel-appointment/cancel-appointment.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { EditAppointmentComponent } from './components/modals/edit-appointment/edit-appointment.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -31,10 +35,13 @@ import { HotToastModule } from '@ngneat/hot-toast';
     HomeComponent,
     CreateAppointmentComponent,
     EditComponent,
-    LoadingComponent
+    LoadingComponent,
+    CancelAppointmentComponent,
+    EditAppointmentComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -47,6 +54,7 @@ import { HotToastModule } from '@ngneat/hot-toast';
     MatProgressSpinnerModule,
     MatExpansionModule,
     MatCardModule,
+    MatDialogModule,
     HotToastModule.forRoot()
   ],
   providers: [],

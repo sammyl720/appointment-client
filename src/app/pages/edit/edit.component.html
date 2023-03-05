@@ -1,6 +1,6 @@
-<ng-container *ngIf="(appointment$ | async ) as appointment; else loading">
-  <div class="container">
-    <mat-card>
+<ng-container *ngIf="(context$ | async ) as context; else loading">
+  <div class="container" *ngIf="context?.available as appointment">
+    <div *ngIf="(appointment$ | async) as appointment">
       <mat-card-header>
         <mat-card-title>Hi {{ appointment.firstName | titlecase }} {{ appointment.lastName |
           titlecase}},</mat-card-title>
@@ -19,25 +19,46 @@
                 {{ appointment.timeslot.date | date : 'fullDate' }}, at {{ appointment.timeslot.time }}
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div class="time-details">
-
+            <div class="appointment-actions">
+              <button title="Change appointment time" mat-icon-button color="primary" type="button"
+                (click)="editAppointment(appointment.timeslot.time)">
+                <mat-icon>
+                  edit
+                </mat-icon>
+              </button>
+              <button title="Cancel Appointment" mat-icon-button color="warn" type="button"
+                (click)="deleteAppointment()">
+                <mat-icon>
+                  delete
+                </mat-icon>
+              </button>
             </div>
-            <p>This is the primary content of the panel.</p>
           </mat-expansion-panel>
-          <mat-expansion-panel>
+          <mat-expansion-panel *ngIf="context.event.event as event">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Self aware panel
+                Where
               </mat-panel-title>
               <mat-panel-description>
-                Currently I am
+                {{ event.location.name }} <br />
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <p>I'm visible because I am open</p>
+            <div class="location-details">
+              <address>
+                {{ event.location.address }} <br />
+              </address>
+              <div class="location-actions">
+                <a target="_blank" title="Show on google maps" [href]="getMapUrl(event.location.address)">
+                  <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+                    <mat-icon>map</mat-icon>
+                  </button>
+                </a>
+              </div>
+            </div>
           </mat-expansion-panel>
         </mat-accordion>
       </mat-card-content>
-    </mat-card>
+    </div>
   </div>
 </ng-container>
 <ng-template #loading>

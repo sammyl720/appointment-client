@@ -1,3 +1,25 @@
 .container {
   padding: 2rem;
 }
+
+.appointment-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.location-details {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .locations-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+}

@@ -29,10 +29,10 @@ export class AppointmentService {
   }
 
   updateAppointmentTime(appointmentId: string, newTime: TIME_SLOT) {
-    return wrapError(this.httpClient.patch<IAppointment>(`${this.apiUrl}/${appointmentId}`, { time: newTime }));
+    return this.httpClient.patch<IAppointment>(`${this.apiUrl}/${appointmentId}`, { time: newTime })
   }
 
   deleteAppointment(appointmentId: string) {
-    return wrapError(this.httpClient.delete(`${this.apiUrl}/${appointmentId}`));
+    return this.httpClient.delete(`${this.apiUrl}/${appointmentId}`)
   }
 }
