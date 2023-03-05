@@ -8,6 +8,10 @@ import { EventResolver } from './resolvers/event.resolver';
 
 const routes: Routes = [
   {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule)
+  },
+  {
     path: ':id',
     component: EditComponent,
     canActivate: [EditAppointmentGuard],

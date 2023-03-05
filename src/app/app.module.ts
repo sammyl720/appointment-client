@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -24,7 +24,8 @@ import { HotToastModule } from '@ngneat/hot-toast';
 import { CancelAppointmentComponent } from './components/modals/cancel-appointment/cancel-appointment.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditAppointmentComponent } from './components/modals/edit-appointment/edit-appointment.component';
-import { CommonModule } from '@angular/common';
+import { environment } from './environments/environment';
+import { AuthInterceptor } from './interceptors/auth';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,13 @@ import { CommonModule } from '@angular/common';
     MatDialogModule,
     HotToastModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
