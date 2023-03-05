@@ -1,0 +1,24 @@
+<div class="event-details">
+  <div class="top-bar">
+    <h1>{{event.title}}</h1>
+    <ng-content></ng-content>
+  </div>
+  <div class="event-location">
+    <div class="event-location-text">
+      <p>
+        Our next blood drive will be at
+      </p>
+    </div>
+    <address>
+      <span class="address-name">
+        {{ event.location.name }}
+      </span>
+      <br />
+      {{ event.location.address }}
+    </address>
+  </div>
+  <time [dateTime]="event.date">
+    On {{ event.date | date : 'fullDate' }} <br />
+    Between {{ event.startingTime }} and {{ event.endingTime }}
+  </time>
+</div>

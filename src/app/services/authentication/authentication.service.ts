@@ -1,8 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
-import { BehaviorSubject, catchError, of, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, throwError } from 'rxjs';
+import { DashboardComponent } from 'src/app/pages/admin/components/dashboard/dashboard.component';
+import { IAdminContent } from 'src/app/types/api.types';
 import { environment } from '../../environments/environment';
 import { StorageService } from '../storage/storage.service';
 interface InitConfig {
@@ -38,7 +40,8 @@ export class AuthenticationService {
     private httpClient: HttpClient,
     private router: Router,
     private storageService: StorageService,
-    private toastService: HotToastService
+    private toastService: HotToastService,
+    private route: ActivatedRoute
   ) {
     google.accounts.id.initialize({
       client_id: environment.googleClientID,
@@ -68,8 +71,23 @@ export class AuthenticationService {
       })
   }
 
-  getAdminUser() {
-    return this.httpClient.get(this.apiUrl + '/admin');
+  getAdminContent(): Observable<IAdminContent> {
+    return this.httpClient.get<IAdminContent>(this.apiUrl + '/admin').pipe(
+      catchError(error => {
+        if (error instanceof HttpErrorResponse && error.status == 401) {
+          this.toastService.error('Invalid credentials for admin access');
+          this.storageService.removeItem('_gac');
+          if (this.route.pathFromRoot.find(route => route.component instanceof DashboardComponent)) {
+            this.router.navigate(['admin', 'login']);
+          }
+        }
+        else {
+          this.toastService.error(error.message);
+        }
+
+        return throwError(() => error)
+      })
+    )
   }
 
   renderButton(button: HTMLElement) {

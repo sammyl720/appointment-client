@@ -26,6 +26,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { EditAppointmentComponent } from './components/modals/edit-appointment/edit-appointment.component';
 import { environment } from './environments/environment';
 import { AuthInterceptor } from './interceptors/auth';
+import { EventDetailsComponent } from './components/event-details/event-details.component';
+import { SharedModule } from './shared/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import { AuthInterceptor } from './interceptors/auth';
     MatExpansionModule,
     MatCardModule,
     MatDialogModule,
+    SharedModule,
     HotToastModule.forRoot()
   ],
   providers: [

@@ -50,6 +50,11 @@ export interface IAppointmentsEvent {
   event: IEvent;
   available: IAppointmentsAvailable;
 }
+
+export interface IAdminContent {
+  booked: IAppointment[],
+  event: IEventDetails | null
+}
 export interface IEvent {
   event: IEventDetails;
 }
@@ -59,15 +64,12 @@ export interface IEventDetails {
   date: Date | null;
   startingTime: string;
   endingTime: string;
-  affilates: string[];
   location: ILocation;
 }
 
 export interface ILocation {
   name: string;
-  shortName?: string;
   address: string;
-  coordinates?: ICoordinates;
 }
 
 export interface ICoordinates {

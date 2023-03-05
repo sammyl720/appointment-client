@@ -2,25 +2,7 @@
   <div class="home-content" *ngIf="(appointmentContext$ | async) as context; else loading">
     <div class="event-details-wrapper" *ngIf="context.event?.event as event; else noEvent;">
       <div [class.--hide-details]="showForm" class="event-details">
-        <h1>{{event.title}}</h1>
-        <div class="event-location">
-          <div class="event-location-text">
-            <p>
-              Our next blood drive will be at
-            </p>
-          </div>
-          <address>
-            <span class="address-name">
-              {{ event.location.name }}
-            </span>
-            <br />
-            {{ event.location.address }}
-          </address>
-        </div>
-        <time [dateTime]="event.date">
-          On {{ event.date | date : 'fullDate' }} <br />
-          Between {{ event.startingTime }}PM and {{ event.endingTime }}PM
-        </time>
+        <app-event-details [event]="event"></app-event-details>
         <p>You can now schedule a blood donation appointment online</p>
         <button class="schedule-btn" (click)="toggleFormInView()" [color]="'primary'" mat-fab extended>
           Schedule Now

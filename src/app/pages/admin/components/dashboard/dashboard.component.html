@@ -1,3 +1,57 @@
-<button type="button" (click)="logout()">
-  logout
-</button>
+<div class="admin-content" *ngIf="(adminContent$ | async) as adminContent; else newEvent">
+  <div class="appointments">
+    <ng-container *ngIf="adminContent.event as event">
+      <app-event-details [event]="event">
+        <button type="button" mat-icon-button color="primary" (click)="logout()">
+          <mat-icon>logout</mat-icon>
+        </button>
+      </app-event-details>
+    </ng-container>
+    <div class="top-bar">
+      <h4>Booked Appointments ({{adminContent.booked.length}})</h4>
+    </div>
+    <table mat-table [dataSource]="dataSource$" matSort class="mat-elevation-z8">
+
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by first name">
+          First Name
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Last Name">
+          Last Name
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by E-Mail">
+          E-Mail
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.email }} </td>
+      </ng-container>
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Phone">
+          Phone
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by weight">
+          Time
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>
+
+<ng-template #newEvent>
+  <h4>Create Event</h4>
+</ng-template>
