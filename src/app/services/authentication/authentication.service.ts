@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
-import { BehaviorSubject, catchError, of } from 'rxjs';
+import { BehaviorSubject, catchError, of, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { StorageService } from '../storage/storage.service';
 interface InitConfig {
@@ -47,11 +47,25 @@ export class AuthenticationService {
   }
 
   callback = async (response: any) => {
-    this.httpClient.post<{ token: string }>(`${this.apiUrl}/admin/login`, response).subscribe(value => {
-      this.toastService.success("Your logged in");
-      this.storageService.setItem('_gac', value.token);
-      this.router.navigate(['admin', 'dashboard']);
-    })
+    this.httpClient.post<{ token: string }>(`${this.apiUrl}/admin/login`, response)
+      .pipe(
+        catchError(error => {
+
+          if (error instanceof HttpErrorResponse && error.status == 401) {
+            this.toastService.error('Invalid credentials for admin access');
+          }
+          else {
+            this.toastService.error(error.message);
+          }
+
+          return throwError(() => error);
+        })
+      )
+      .subscribe(value => {
+        this.toastService.success("Your logged in");
+        this.storageService.setItem('_gac', value.token);
+        this.router.navigate(['admin', 'dashboard']);
+      })
   }
 
   getAdminUser() {
