@@ -9,7 +9,7 @@
 
   main {
     flex: 2;
-    height: 100%;
-    overflow: auto;
+    height: fit-content;
+    max-height: calc(100vh - 80px);
   }
 }

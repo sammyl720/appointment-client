@@ -4,6 +4,10 @@
   height: 100%;
 }
 
+.container.home-container {
+  padding-block: 4.2vh;
+}
+
 .form-backdrop {
   position: absolute;
   pointer-events: none;
@@ -68,10 +72,11 @@
 }
 
 .create-form-wrapper {
-  transform: translateY(150%);
+  transform: translateY(140vw);
   transition: 300ms ease-in;
   max-width: clamp(60vw, 800px, 96vw);
   margin: 1rem auto;
+  opacity: 0;
 
   .close-button {
     background: white;
@@ -97,6 +102,7 @@
 
   &.--show-form {
     transform: translate(0);
+    opacity: 1;
   }
 }
 
