@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, of, throwError } from 'rxjs';
 import { IAppointment, IAppointmentsAvailable, ICreateAppointment } from 'src/app/types/api.types';
 import { TIME_SLOT } from 'src/app/types/fields';
-import { environment } from '../../environments/environment';
+import { environment } from 'src/environments/environment';
 import { wrapError } from '../util';
 
 @Injectable({

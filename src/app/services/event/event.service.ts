@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/app/environments/environment';
+import { environment } from 'src/environments/environment';
 import { IEvent, IEventDetails, IEventDto } from 'src/app/types/api.types';
 import { wrapError } from '../util';
 

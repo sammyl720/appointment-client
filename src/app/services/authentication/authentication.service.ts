@@ -5,7 +5,7 @@ import { HotToastService } from '@ngneat/hot-toast';
 import { BehaviorSubject, catchError, Observable, of, throwError } from 'rxjs';
 import { DashboardComponent } from 'src/app/pages/admin/components/dashboard/dashboard.component';
 import { IAdminContent } from 'src/app/types/api.types';
-import { environment } from '../../environments/environment';
+import { environment } from 'src/environments/environment';
 import { StorageService } from '../storage/storage.service';
 interface InitConfig {
   client_id: string;

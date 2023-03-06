@@ -1,7 +1,7 @@
 
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-import { environment } from '../../../../environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
