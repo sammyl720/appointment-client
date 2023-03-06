@@ -14,7 +14,6 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { CancelAppointmentComponent } from './components/modals/cancel-appointment/cancel-appointment.component';
-import { MatDialogModule } from '@angular/material/dialog';
 import { EditAppointmentComponent } from './components/modals/edit-appointment/edit-appointment.component';
 import { AuthInterceptor } from './interceptors/auth';
 import { SharedModule } from './shared/shared/shared.module';
@@ -40,7 +39,6 @@ import { EmailSubscribtionButtonComponent } from './shared/components/email-subs
     HttpClientModule,
     BrowserAnimationsModule,
     MatExpansionModule,
-    MatDialogModule,
     SharedModule,
     HotToastModule.forRoot()
   ],

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject, map, Observable, switchMap } from 'rxjs';
+import { DisplayAppointmentComponent } from '../display-appointment/display-appointment.component';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { ResponsiveService } from 'src/app/services/responsive/responsive.service';
 import { IAdminContent, IAppointment } from 'src/app/types/api.types';
 import { TIME_SLOT } from 'src/app/types/fields';
 
@@ -24,8 +27,17 @@ export class DashboardComponent {
   adminContent$: Observable<IAdminContent>;
   dataSource$: Observable<IAppointment[]>
 
-  constructor(private authService: AuthenticationService) {
-    this.adminContent$ = this.authService.getAdminContent();
+  constructor(
+    public responsiveService: ResponsiveService,
+    private authService: AuthenticationService,
+    private dialog: MatDialog
+  ) {
+    this.adminContent$ = this.refreshRequests.pipe(
+      switchMap(() => {
+        return this.authService.getAdminContent();
+      })
+    );
+
     this.dataSource$ = this.refreshRequests
       .pipe(
         switchMap(() => this.adminContent$
@@ -42,6 +54,15 @@ export class DashboardComponent {
           )
         )
       )
+  }
+
+  showAppointmentDetails(appointment: IAppointment) {
+    console.log(appointment)
+    if (this.responsiveService.isMobile || this.responsiveService.isTablet) {
+      this.dialog.open(DisplayAppointmentComponent, {
+        data: appointment
+      })
+    }
   }
 
   refresh() {

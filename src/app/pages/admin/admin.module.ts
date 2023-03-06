@@ -5,20 +5,23 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { MatTableModule } from '@angular/material/table';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { EventDetailsComponent } from 'src/app/components/event-details/event-details.component';
+
 import { SharedModule } from 'src/app/shared/shared/shared.module';
 import { CreateEventComponent } from './components/create-event/create-event.component';
+import { DisplayAppointmentComponent } from './components/display-appointment/display-appointment.component';
+import { MatListModule } from '@angular/material/list';
+
 @NgModule({
   declarations: [
     DashboardComponent,
     LoginComponent,
-    CreateEventComponent
+    CreateEventComponent,
+    DisplayAppointmentComponent
   ],
   imports: [
     AdminRoutingModule,
     CommonModule,
+    MatListModule,
     MatTableModule,
     SharedModule
   ]

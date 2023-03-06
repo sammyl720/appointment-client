@@ -1,0 +1,37 @@
+<div class="appointment-details-wrapper">
+  <mat-card>
+    <mat-card-content>
+      <mat-nav-list>
+        <div mat-subheader>Name</div>
+        <mat-list-item>
+          <mat-icon matListItemIcon>person</mat-icon>
+          <div matListItemTitle>{{ data.firstName + data.lastName }}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <div mat-subheader>Contact Information</div>
+        <mat-list-item>
+          <mat-icon matListItemIcon>email</mat-icon>
+          <div matListItemTitle>{{ data.email }}</div>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon matListItemIcon>phone</mat-icon>
+          <div matListItemTitle>{{ data.phone }}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <div mat-subheader>Appointment Time</div>
+        <mat-list-item>
+          <mat-icon matListItemIcon>clock</mat-icon>
+          <div matListItemTitle>{{ data.time }}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-nav-list>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close cdkFocusInitial>
+          Close
+        </button>
+      </mat-dialog-actions>
+    </mat-card-footer>
+  </mat-card>
+</div>
