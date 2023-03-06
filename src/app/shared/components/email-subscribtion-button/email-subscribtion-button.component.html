@@ -1,0 +1,6 @@
+<form [formGroup]="emailSubForm" (ngSubmit)="submit()" class="email-notifaction">
+  <input title="E-Mail to notify" formControlName="email" placeholder="notify-me@gmail.com" />
+  <button [disabled]="emailSubForm.invalid" type="submit">
+    <mat-icon>email</mat-icon>
+  </button>
+</form>

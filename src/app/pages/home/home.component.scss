@@ -24,6 +24,14 @@
 
 }
 
+.no-event {
+  width: 100%;
+  height: 100%;
+  max-width: clamp(60vw, 800px, 96vw);
+  color: rebeccapurple;
+  padding: 8px;
+}
+
 .event-details-wrapper {
   width: 100%;
   height: 100%;

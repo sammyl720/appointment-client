@@ -1,0 +1,53 @@
+form {
+  border: 2px solid rgba(102, 51, 153, 0.233);
+  border-radius: 48px;
+  display: flex;
+  overflow: hidden;
+  box-sizing: border-box;
+  box-shadow: -1px -2px 12px -6px rgba(102, 51, 153, 0.2);
+
+  input {
+    flex: 2;
+    padding: 12px;
+    padding-inline: 16px;
+    font-size: 1.2rem;
+    font-weight: 600;
+
+    &::placeholder {
+      color: rgba(102, 51, 153, 0.6);
+    }
+  }
+
+  button {
+    padding: 16px;
+    height: 100%;
+    font-weight: 800;
+    min-width: 32px;
+    background: rebeccapurple;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:disabled {
+      opacity: 0.3;
+    }
+  }
+
+  button,
+  input {
+    border: none;
+    outline: none;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+    height: 100%;
+
+    &:active,
+    &:focus {
+      outline: none;
+      border: none;
+    }
+
+
+  }
+}

@@ -9,10 +9,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { EventDetailsComponent } from 'src/app/components/event-details/event-details.component';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
+import { CreateEventComponent } from './components/create-event/create-event.component';
 @NgModule({
   declarations: [
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    CreateEventComponent
   ],
   imports: [
     AdminRoutingModule,

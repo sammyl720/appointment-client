@@ -30,6 +30,12 @@ body {
   overflow-x: hidden;
 }
 
+@media screen and (max-width: 768px) {
+  body {
+    overflow: auto;
+  }
+}
+
 p,
 h1,
 h2,
@@ -83,5 +89,18 @@ body {
 @media screen and (max-width: 900px) {
   .panel {
     padding: 0.5rem 1rem;
+  }
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background: transparent;
+
+  &:hover,
+  &:focus {
+    background: transparent;
+  }
+
+  .mat-mdc-form-field-focus-overlay {
+    background-color: transparent;
   }
 }

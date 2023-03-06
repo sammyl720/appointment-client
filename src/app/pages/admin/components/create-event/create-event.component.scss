@@ -1,0 +1,48 @@
+.create-event-wrapper {
+  width: 100%;
+  max-width: 100%;
+
+  h4 {
+    margin: 4px 0;
+  }
+
+  .create-event {
+    display: flex;
+    justify-content: flex-start;
+    gap: 4px;
+    flex-wrap: wrap;
+
+    .event {
+      &-block {
+        display: flex;
+        align-items: center;
+        justify-content: stretch;
+        gap: 12px;
+        margin: 0.25rem 0;
+        padding: 0.25rem 1rem;
+        flex-wrap: wrap;
+        width: 100%;
+        border: 1px solid rgba(102, 51, 153, 0.1);
+        border-radius: 8px;
+        box-shadow: 1px 1px 12px -6px rgba(0, 0, 0, 0.2);
+
+        h3,
+        h4 {
+          width: 100%;
+          flex: 7;
+          flex-basis: 100%;
+        }
+      }
+
+      .event-action {
+        margin-top: 16px;
+        width: 100%;
+        display: flex;
+
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

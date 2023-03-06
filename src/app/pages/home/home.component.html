@@ -23,7 +23,16 @@
     </ng-container>
   </div>
   <ng-template #noEvent>
-    <h4>No Event</h4>
+    <div class="no-event">
+      <h4>Welcome to the ahavas chesed blood drive appointment page</h4>
+      <p>We currently don't have a blood drive scheduled.</p>
+      <p>But we'll update the page as soon as we do</p>
+      <br>
+      <hr />
+      <br>
+      <p>Get notified by e-mail when our next blood drive is scheduled</p>
+      <app-email-subscribtion-button (onSubscribe)="addEmail($event)"></app-email-subscribtion-button>
+    </div>
   </ng-template>
   <ng-template #loading>
     <app-loading></app-loading>

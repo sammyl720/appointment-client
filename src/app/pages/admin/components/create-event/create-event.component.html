@@ -1,0 +1,72 @@
+<div class="create-event-wrapper">
+  <form class="create-event" [formGroup]="createEventForm" (ngSubmit)="createEvent()">
+    <div class="event-details event-block">
+      <h4>Event Details</h4>
+      <mat-form-field appearance="fill" [floatLabel]="'auto'">
+        <mat-label>Event Title</mat-label>
+        <input matInput formControlName="title" matInput placeholder="Blood Drive">
+        <mat-error *ngIf="controlIsInvalid('title')"> Event title should be at least 3 characters long </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" [floatLabel]="'auto'">
+        <mat-label>Event Host</mat-label>
+        <input matInput formControlName="host" matInput placeholder="Ahavas Chesed">
+        <mat-error *ngIf="controlIsInvalid('host')"> Event Host should be at least 3 characters long </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" [floatLabel]="'auto'">
+        <mat-label>Event Description</mat-label>
+        <input formControlName="date" matInput formControlName="description" matInput
+          placeholder="Additional details about the event">
+      </mat-form-field>
+    </div>
+    <div class="event-time event-block">
+      <h4>
+        Event date and time details
+      </h4>
+      <mat-form-field appearance="fill">
+        <mat-label>Date of event</mat-label>
+        <input [min]="minDate" [max]="maxDate" (dateChange)="dateChange($event)" title="Date of event" matInput
+          [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="controlIsInvalid('date')"> Event date should be between 3 days and 6 months from now
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" [floatLabel]="'auto'">
+        <mat-label>Event Starting Time</mat-label>
+        <input matInput formControlName="startingTime" matInput placeholder="2:30PM">
+        <mat-error *ngIf="controlIsInvalid('startingTime')"> Event Starting time should be in the format of (2:30PM)
+          h:mmPM
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" [floatLabel]="'auto'">
+        <mat-label>Event Ending Time</mat-label>
+        <input matInput formControlName="endingTime" matInput placeholder="9:00PM">
+        <mat-error *ngIf="controlIsInvalid('endingTime')"> Event Ending time should be in the format of (10:15PM) h:mmPM
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="event-location event-block" formGroupName="location">
+      <h4>Location Details</h4>
+      <mat-form-field appearance="fill" [floatLabel]="'auto'">
+        <mat-label>Location Name</mat-label>
+        <input matInput formControlName="name" matInput placeholder="Local Library">
+        <mat-error *ngIf="controlIsValidAddress('name')"> Event Location Should be at least 5 characters long
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill" [floatLabel]="'auto'">
+        <mat-label>Full Address</mat-label>
+        <input matInput formControlName="address" matInput placeholder="123 main st, brooklyn, NY 12212">
+        <mat-error *ngIf="controlIsValidAddress('address')"> Address should be include the street, city, state and
+          zipcode
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="event-action">
+      <button [disabled]="createEventForm.invalid" [color]="'primary'" type="submit" mat-fab extended>
+        Create Event
+        <mat-icon>event</mat-icon>
+      </button>
+    </div>
+  </form>
+</div>

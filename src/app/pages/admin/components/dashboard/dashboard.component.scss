@@ -1,6 +1,10 @@
-.admin-content {
+.dashboard {
   max-width: clamp(60vw, 800px, 96vw);
+}
+
+.admin-content {
   margin: 1rem auto;
+  width: 100%;
   padding: 1rem;
   display: flex;
   flex-direction: column;

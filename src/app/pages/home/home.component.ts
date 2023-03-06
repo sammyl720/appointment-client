@@ -1,8 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { filter, map, Observable } from 'rxjs';
+import { HotToastService } from '@ngneat/hot-toast';
+import { catchError, filter, map, Observable } from 'rxjs';
 import { AppointmentService } from 'src/app/services/appointment/appointment.service';
+import { EventService } from 'src/app/services/event/event.service';
 import { IAppointmentsAvailable, IAppointmentsEvent, IEvent, IEventDetails, isProperApiValue } from 'src/app/types/api.types';
 
 @Component({
@@ -16,7 +18,9 @@ export class HomeComponent {
 
   constructor(
     public appointmentService: AppointmentService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private eventService: EventService,
+    private toastService: HotToastService
   ) {
     this.appointmentContext$ = this.activatedRoute.data.pipe(
       map(data => ({ event: data['event'], available: data['available'] }))
@@ -25,5 +29,19 @@ export class HomeComponent {
 
   toggleFormInView() {
     this.showForm = !this.showForm;
+  }
+
+  addEmail(email: string) {
+    this.eventService.addEmailToNotify(email).subscribe({
+      next: (response) => this.toastService.success(response.message),
+      error: error => {
+        if (error instanceof HttpErrorResponse) {
+          this.toastService.error(error.message)
+        }
+        else {
+          this.toastService.error('Hmmm... something went wrong')
+        }
+      }
+    })
   }
 }

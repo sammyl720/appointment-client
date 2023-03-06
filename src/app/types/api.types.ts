@@ -22,14 +22,15 @@ export interface ICreateAppointment {
 export interface UpdateAppointmentDTO {
   time: TIME_SLOT;
 }
-
 export interface IAppointment {
+
   firstName: string,
   lastName: string;
   email: string;
   phone: string;
   date: Date;
   timeslot: ITimeSlot;
+  time?: TIME_SLOT;
   _id?: string;
 }
 
@@ -58,8 +59,21 @@ export interface IAdminContent {
 export interface IEvent {
   event: IEventDetails;
 }
+
+export interface IEventDto {
+  title: string;
+  host: string;
+  description?: string;
+  date: Date;
+  startingTime: TIME_SLOT;
+  endingTime: TIME_SLOT;
+  appointmentsPerInterval: number;
+  intervalsPerHour: number;
+  location: ILocation;
+}
 export interface IEventDetails {
   title: string;
+  host?: string;
   description?: string;
   date: Date | null;
   startingTime: string;

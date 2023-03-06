@@ -28,6 +28,7 @@ import { environment } from './environments/environment';
 import { AuthInterceptor } from './interceptors/auth';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import { SharedModule } from './shared/shared/shared.module';
+import { EmailSubscribtionButtonComponent } from './shared/components/email-subscribtion-button/email-subscribtion-button.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { SharedModule } from './shared/shared/shared.module';
     EditComponent,
     LoadingComponent,
     CancelAppointmentComponent,
-    EditAppointmentComponent
+    EditAppointmentComponent,
+    EmailSubscribtionButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -48,13 +50,6 @@ import { SharedModule } from './shared/shared/shared.module';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatProgressSpinnerModule,
     MatExpansionModule,
     MatCardModule,
     MatDialogModule,

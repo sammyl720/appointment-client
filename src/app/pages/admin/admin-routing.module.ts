@@ -10,12 +10,14 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'login',
     canActivate: [NonAuthGuard],
-    component: LoginComponent
+    component: LoginComponent,
+    runGuardsAndResolvers: 'always'
   },
   {
     path: '',
