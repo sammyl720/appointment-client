@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:4000',
-  googleClientID: '1013573502067-r0ke2uh7eiif4682n3dfik2phs26ubn3.apps.googleusercontent.com'
+  apiUrl: 'https://api.chesedblooddrive.com',
+  googleClientID: '1013573502067-jhfmhmsf91fa3vm6olsl0jvi2v2sisdo.apps.googleusercontent.com'
 }
