@@ -8,6 +8,7 @@ import { EditAppointmentComponent } from 'src/app/components/modals/edit-appoint
 import { AppointmentService } from 'src/app/services/appointment/appointment.service';
 import { IAppointment, IAppointmentsAvailable, IAppointmentsEvent } from 'src/app/types/api.types';
 import { TIME_SLOT } from 'src/app/types/fields';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-edit',
@@ -18,6 +19,7 @@ export class EditComponent {
   appointment$: Observable<IAppointment>;
   available$: Observable<IAppointmentsAvailable>;
   context$: Observable<IAppointmentsEvent>;
+  apiUrl = environment.apiUrl;
 
   constructor(
     private router: Router,
@@ -105,6 +107,10 @@ export class EditComponent {
   getAppointmentId() {
     const id = this.activatedRoute.snapshot.params['id'];
     return id;
+  }
+
+  get calendarUrl() {
+    return `${this.apiUrl}/appointments/${this.getAppointmentId()}/calendar`;
   }
 
   getMapUrl(address: string) {
