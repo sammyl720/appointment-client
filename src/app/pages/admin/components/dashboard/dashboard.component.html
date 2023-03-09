@@ -11,7 +11,11 @@
         <ng-container *ngIf="!!adminContent.booked?.length; else noAppointments">
           <div class="top-bar">
             <h4>Booked Appointments ({{adminContent.booked.length}})</h4>
-            <mat-icon (click)="refresh()" class="refresh-icon">refresh</mat-icon>
+            <div class="actions">
+              <mat-icon title="Download list as CSV file" class="action-item"
+                (click)="downloadCSV()">download</mat-icon>
+              <mat-icon title="Refresh list" (click)="refresh()" class="refresh-icon action-item">refresh</mat-icon>
+            </div>
           </div>
           <app-appointments-table (onSortChange)="sortChange($event)" [dataSource]="(dataSource$ | async)!"
             [responsiveState]="responsiveState"></app-appointments-table>

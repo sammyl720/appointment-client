@@ -1,12 +1,13 @@
-import { Component, QueryList, ViewChildren } from '@angular/core';
+import { Component, Inject, QueryList, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { BehaviorSubject, combineLatest, map, Observable, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, combineLatest, lastValueFrom, map, Observable, switchMap, take, tap } from 'rxjs';
 import { DisplayAppointmentComponent } from '../display-appointment/display-appointment.component';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { ResponsiveService } from 'src/app/services/responsive/responsive.service';
 import { IAdminContent, IAppointment, ITimeSlot } from 'src/app/types/api.types';
 import { TIME_SLOT } from 'src/app/types/fields';
 import { MatSort, Sort } from '@angular/material/sort';
+import { DOCUMENT } from '@angular/common';
 
 export interface AppointmentTableColumns {
   firstName: string;
@@ -35,7 +36,8 @@ export class DashboardComponent {
   constructor(
     public responsiveService: ResponsiveService,
     private authService: AuthenticationService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    @Inject(DOCUMENT) private document: Document
   ) {
     this.adminContent$ = this.refreshRequests.pipe(
       switchMap(() => {
@@ -64,6 +66,34 @@ export class DashboardComponent {
           )
         )
       )
+  }
+
+  async downloadCSV() {
+    const appointments = await lastValueFrom(this.dataSource$.pipe(take(1)));
+    const date = new Date(appointments[0]?.date).toISOString().substring(0, 10);
+    const fileName = `Blood-Drive-Appointments-${date}.csv`;
+    const csvContent = this.getAppointmentsAsCSVString(appointments);
+    const csvFile = new Blob([csvContent], { type: 'text/csv' });
+
+    const link = this.document.createElement('a');
+    link.download = fileName;
+    link.href = this.document.defaultView!.URL.createObjectURL(csvFile);
+    link.click();
+
+    link.remove();
+
+  }
+
+  getAppointmentsAsCSVString(appointments: IAppointment[]) {
+
+    let csvText = `first name, last name, email, phone, time\r\n`;
+    csvText += appointments.reduce((full, current) => full + this.getCsvRow(current), '');
+    return csvText.trimEnd();
+  }
+
+  getCsvRow(appointment: IAppointment) {
+    const { firstName, lastName, email, phone, timeslot: { time } } = appointment;
+    return `${firstName},${lastName},${email},${phone.toString()},${time}\r\n`;
   }
 
   sortAppointments(appointments: IAppointment[], sortInfo: Sort) {

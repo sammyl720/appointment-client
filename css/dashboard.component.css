@@ -1,0 +1,88 @@
+.dashboard {
+  max-width: clamp(60vw, 800px, 96vw);
+  margin: 0 auto;
+  height: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.admin-content {
+  margin: 1rem auto;
+  width: 100%;
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 4rem;
+}
+
+.admin-content button {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
+.top-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.top-bar .refresh-icon {
+  color: green;
+  font-size: 32px;
+}
+
+.top-bar .refresh-icon:active {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 12px;
+  font-size: 32px;
+}
+
+.actions .action-item {
+  height: 40px;
+  width: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+  border: 1px solid lightblue;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: rgba(173, 216, 230, 0.329);
+  color: #031029;
+  -webkit-box-shadow: 1px -2px 12px -6px #032900;
+          box-shadow: 1px -2px 12px -6px #032900;
+}
+
+.--mobile-row {
+  cursor: pointer;
+}

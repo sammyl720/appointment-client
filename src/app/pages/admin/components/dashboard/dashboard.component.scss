@@ -30,18 +30,34 @@
   .refresh-icon {
     color: green;
     font-size: 32px;
-    height: 40px;
-    width: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
 
     &:active {
       transform: rotate(45deg);
     }
   }
 
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 32px;
+
+  .action-item {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid lightblue;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: rgba(173, 216, 230, 0.329);
+    color: rgb(3, 16, 41);
+    box-shadow: 1px -2px 12px -6px rgb(3.16, 41, 0.3);
+  }
 }
 
 .--mobile-row {
