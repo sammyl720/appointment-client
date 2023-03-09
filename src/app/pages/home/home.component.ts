@@ -23,7 +23,7 @@ export class HomeComponent {
     private toastService: HotToastService
   ) {
     this.appointmentContext$ = this.activatedRoute.data.pipe(
-      map(data => ({ event: data['event'], available: data['available'] }))
+      map(data => ({ event: data['event'], available: (data['available'] ?? [] as IAppointmentsAvailable[]) }))
     );
   }
 

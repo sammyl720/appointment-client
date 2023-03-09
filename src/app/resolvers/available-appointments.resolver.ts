@@ -19,7 +19,14 @@ export class AvailableAppointmentsResolver implements Resolve<IAppointmentsAvail
   }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IAppointmentsAvailable | null> {
     return this.appointmentService.getAvaliableAppoinments().pipe(
-      map(appointment => isProperApiValue(appointment) ? appointment : null)
+      map(appointment => isProperApiValue(appointment) ? this.filterForOpenAppointments(appointment) : null)
     );
+  }
+
+  filterForOpenAppointments(appointments: IAppointmentsAvailable): IAppointmentsAvailable {
+    return {
+      ...appointments,
+      slots: appointments.slots.filter(slot => !!slot.available)
+    }
   }
 }
