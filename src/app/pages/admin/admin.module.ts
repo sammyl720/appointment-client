@@ -10,16 +10,20 @@ import { SharedModule } from 'src/app/shared/shared/shared.module';
 import { CreateEventComponent } from './components/create-event/create-event.component';
 import { DisplayAppointmentComponent } from './components/display-appointment/display-appointment.component';
 import { MatListModule } from '@angular/material/list';
+import { AppointmentsTableComponent } from './components/appointments-table/appointments-table.component';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     LoginComponent,
     CreateEventComponent,
-    DisplayAppointmentComponent
+    DisplayAppointmentComponent,
+    AppointmentsTableComponent
   ],
   imports: [
     AdminRoutingModule,
+    MatSortModule,
     CommonModule,
     MatListModule,
     MatTableModule,
