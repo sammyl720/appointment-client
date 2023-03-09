@@ -4,7 +4,7 @@ import { BehaviorSubject, combineLatest, map, Observable, switchMap, tap } from 
 import { DisplayAppointmentComponent } from '../display-appointment/display-appointment.component';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { ResponsiveService } from 'src/app/services/responsive/responsive.service';
-import { IAdminContent, IAppointment } from 'src/app/types/api.types';
+import { IAdminContent, IAppointment, ITimeSlot } from 'src/app/types/api.types';
 import { TIME_SLOT } from 'src/app/types/fields';
 import { MatSort, Sort } from '@angular/material/sort';
 
@@ -68,15 +68,36 @@ export class DashboardComponent {
 
   sortAppointments(appointments: IAppointment[], sortInfo: Sort) {
     const { active, direction } = sortInfo;
+    const isAsc = direction === 'asc';
+
     return appointments.sort((first, second) => {
+      if (active === 'time') {
+        return this.sortByTime(first, second, isAsc);
+      }
+
       const firstValue = first[active as keyof IAppointment];
       const secondValue = second[active as keyof IAppointment];
       const isFirstGreater = firstValue! > secondValue!;
-      const isAsc = direction === 'asc';
       return isFirstGreater || !isAsc ? 1 : -1;
     })
   }
 
+  sortByTime(firstAppointment: IAppointment, secondAppointment: IAppointment, isAsc: boolean) {
+    const firstTime = this.getMinuteAndHour(firstAppointment.timeslot.time)
+    const secondTime = this.getMinuteAndHour(firstAppointment.timeslot.time);
+
+    const isFirstGreater = firstTime.hour === secondTime.hour ? firstTime.minute > secondTime.minute : firstTime.hour > secondTime.hour;
+    return isFirstGreater || !isAsc ? 1 : -1;
+  }
+
+  getMinuteAndHour(time: TIME_SLOT) {
+    const [hour, minute] = this.removePM(time).split(':').map(val => parseInt(val))
+    return { hour, minute }
+  }
+
+  removePM(time: TIME_SLOT) {
+    return time.substring(0, time.indexOf('PM'))
+  }
   refresh() {
     this.refreshRequests.next(true);
   }
