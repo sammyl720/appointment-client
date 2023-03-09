@@ -1,9 +1,9 @@
 .dashboard {
   max-width: clamp(60vw, 800px, 96vw);
   margin: 0 auto;
-  min-height: fit-content;
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 .admin-content {
