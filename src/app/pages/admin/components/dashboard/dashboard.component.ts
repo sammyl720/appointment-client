@@ -84,11 +84,12 @@ export class DashboardComponent {
 
   sortByTime(firstAppointment: IAppointment, secondAppointment: IAppointment, isAsc: boolean) {
     const firstTime = this.getMinuteAndHour(firstAppointment.timeslot.time)
-    const secondTime = this.getMinuteAndHour(firstAppointment.timeslot.time);
+    const secondTime = this.getMinuteAndHour(secondAppointment.timeslot.time);
 
     const isFirstGreater = firstTime.hour === secondTime.hour ? firstTime.minute > secondTime.minute : firstTime.hour > secondTime.hour;
     const multiplier = isAsc ? -1 : 1;
-    return isFirstGreater ? 1 * multiplier : -1 * multiplier;
+    const sortValue = isFirstGreater ? 1 : -1;
+    return sortValue * multiplier;
   }
 
   getMinuteAndHour(time: TIME_SLOT) {
