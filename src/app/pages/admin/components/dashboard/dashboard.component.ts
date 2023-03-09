@@ -87,7 +87,8 @@ export class DashboardComponent {
     const secondTime = this.getMinuteAndHour(firstAppointment.timeslot.time);
 
     const isFirstGreater = firstTime.hour === secondTime.hour ? firstTime.minute > secondTime.minute : firstTime.hour > secondTime.hour;
-    return isFirstGreater || !isAsc ? 1 : -1;
+    const multiplier = isAsc ? -1 : 1;
+    return isFirstGreater || !isAsc ? 1 * multiplier : -1 * multiplier;
   }
 
   getMinuteAndHour(time: TIME_SLOT) {
