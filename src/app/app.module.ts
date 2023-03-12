@@ -11,7 +11,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreateAppointmentComponent } from './components/create-appointment/create-appointment.component';
 import { EditComponent } from './pages/edit/edit.component';
 import { LoadingComponent } from './components/loading/loading.component';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { CancelAppointmentComponent } from './components/modals/cancel-appointment/cancel-appointment.component';
 import { EditAppointmentComponent } from './components/modals/edit-appointment/edit-appointment.component';
@@ -38,7 +37,6 @@ import { EmailSubscribtionButtonComponent } from './shared/components/email-subs
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatExpansionModule,
     SharedModule,
     HotToastModule.forRoot()
   ],

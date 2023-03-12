@@ -12,6 +12,7 @@ import { DisplayAppointmentComponent } from './components/display-appointment/di
 import { MatListModule } from '@angular/material/list';
 import { AppointmentsTableComponent } from './components/appointments-table/appointments-table.component';
 import { MatSortModule } from '@angular/material/sort';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { MatSortModule } from '@angular/material/sort';
     CommonModule,
     MatListModule,
     MatTableModule,
+    MatDatepickerModule,
     SharedModule
   ]
 })
