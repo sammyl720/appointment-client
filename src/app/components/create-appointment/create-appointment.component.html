@@ -18,7 +18,7 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Phone number</mat-label>
-      <input matInput formControlName="phone" matInput placeholder="Phone number*">
+      <input inputmode="tel" matInput formControlName="phone" matInput placeholder="Phone number*">
       <mat-icon matSuffix>phone</mat-icon>
       <mat-error *ngIf="controlIsInvalid('phone')"> Please enter a valid phone number </mat-error>
       <mat-hint>Include area code</mat-hint>
