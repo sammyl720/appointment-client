@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
-import { catchError, filter, map, Observable, of, take } from 'rxjs';
+import { catchError, filter, map, Observable, of, startWith, take } from 'rxjs';
 import { CancelAppointmentComponent } from 'src/app/components/modals/cancel-appointment/cancel-appointment.component';
 import { EditAppointmentComponent } from 'src/app/components/modals/edit-appointment/edit-appointment.component';
 import { AppointmentService } from 'src/app/services/appointment/appointment.service';
@@ -19,6 +19,7 @@ export class EditComponent {
   appointment$: Observable<IAppointment>;
   available$: Observable<IAppointmentsAvailable>;
   context$: Observable<IAppointmentsEvent>;
+  loading$: Observable<boolean>;
   apiUrl = environment.apiUrl;
 
   constructor(
@@ -39,6 +40,12 @@ export class EditComponent {
     );
 
     this.context$ = this.activatedRoute.data as Observable<IAppointmentsEvent>;
+    this.loading$ = this.context$.pipe(
+      filter(hasData => !!hasData),
+      map(data => !data),
+      take(1),
+      startWith(true)
+    )
   }
 
   editAppointment(current: TIME_SLOT) {

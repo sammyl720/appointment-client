@@ -1,29 +1,31 @@
 <div class="container home-container">
-  <div class="home-content" *ngIf="(appointmentContext$ | async) as context; else loading">
-    <div class="event-details-wrapper" *ngIf="context.event?.event as event; else noEvent;">
-      <div [class.--hide-details]="showForm" class="event-details">
-        <app-event-details [event]="event"></app-event-details>
-        <ng-container *ngIf=" !!(context.available.appointmentsLeft);">
-          <p>You can now schedule a blood donation appointment online</p>
-          <button class="schedule-btn" (click)="toggleFormInView()" [color]="'primary'" mat-fab extended>
-            Schedule Now
-            <mat-icon>schedule</mat-icon>
-          </button>
-        </ng-container>
-      </div>
-    </div>
-    <ng-container *ngIf="!!(context.event?.event) && !!(context.available.appointmentsLeft);">
-      <div (click)="toggleFormInView()" [class.--show-backdrop]="showForm" class="form-backdrop">
-      </div>
-      <div [class.--show-form]="showForm" class="create-form-wrapper">
-        <div (click)="toggleFormInView()" class="close-button">
-          <mat-icon>close</mat-icon>
+  <ng-container *ngIf="!(loading$ | async); else loading">
+    <div class="home-content" *ngIf="(appointmentContext$ | async) as context; else loading">
+      <div class="event-details-wrapper" *ngIf="context.event?.event as event; else noEvent;">
+        <div [class.--hide-details]="showForm" class="event-details">
+          <app-event-details [event]="event"></app-event-details>
+          <ng-container *ngIf=" !!(context.available.appointmentsLeft);">
+            <p>You can now schedule a blood donation appointment online</p>
+            <button class="schedule-btn" (click)="toggleFormInView()" [color]="'primary'" mat-fab extended>
+              Schedule Now
+              <mat-icon>schedule</mat-icon>
+            </button>
+          </ng-container>
         </div>
-        <app-create-appointment class="create-appointment" [openAppointments]="context.available">
-        </app-create-appointment>
       </div>
-    </ng-container>
-  </div>
+      <ng-container *ngIf="!!(context.event?.event) && !!(context.available.appointmentsLeft);">
+        <div (click)="toggleFormInView()" [class.--show-backdrop]="showForm" class="form-backdrop">
+        </div>
+        <div [class.--show-form]="showForm" class="create-form-wrapper">
+          <div (click)="toggleFormInView()" class="close-button">
+            <mat-icon>close</mat-icon>
+          </div>
+          <app-create-appointment class="create-appointment" [openAppointments]="context.available">
+          </app-create-appointment>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
   <ng-template #noEvent>
     <div class="no-event">
       <h4>Welcome to the ahavas chesed blood drive appointment page</h4>

@@ -1,71 +1,73 @@
-<ng-container *ngIf="(context$ | async ) as context; else loading">
-  <div class="container" *ngIf="context?.available as appointment">
-    <div *ngIf="(appointment$ | async) as appointment">
-      <mat-card-header>
-        <mat-card-title>Hi {{ appointment.firstName | titlecase }} {{ appointment.lastName |
-          titlecase}},</mat-card-title>
-        <mat-card-subtitle>
-          <h4>Here's your appointment details</h4>
-        </mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="calendar-option">
-          <a download rel="noopener" target="_blank" mat-button color="primary" [href]="calendarUrl">
-            <span>Add to calendar</span>
-            <mat-icon color="primary">event</mat-icon>
-          </a>
-        </div>
-        <mat-accordion>
-          <mat-expansion-panel hideToggle>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                When
-              </mat-panel-title>
-              <mat-panel-description>
-                {{ appointment.timeslot.date | date : 'fullDate' }}, at {{ appointment.timeslot.time }}
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <div class="appointment-actions">
-              <button title="Change appointment time" mat-icon-button color="primary" type="button"
-                (click)="editAppointment(appointment.timeslot.time)">
-                <mat-icon>
-                  edit
-                </mat-icon>
-              </button>
-              <button title="Cancel Appointment" mat-icon-button color="warn" type="button"
-                (click)="deleteAppointment()">
-                <mat-icon>
-                  delete
-                </mat-icon>
-              </button>
-            </div>
-          </mat-expansion-panel>
-          <mat-expansion-panel *ngIf="context.event.event as event">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Where
-              </mat-panel-title>
-              <mat-panel-description>
-                {{ event.location.name }} <br />
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <div class="location-details">
-              <address>
-                {{ event.location.address }} <br />
-              </address>
-              <div class="location-actions">
-                <a target="_blank" title="Show on google maps" [href]="getMapUrl(event.location.address)">
-                  <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
-                    <mat-icon>map</mat-icon>
-                  </button>
-                </a>
+<ng-container *ngIf="!(loading$ | async); else loading;">
+  <ng-container *ngIf="(context$ | async ) as context;">
+    <div class="container" *ngIf="context?.available as appointment">
+      <div *ngIf="(appointment$ | async) as appointment">
+        <mat-card-header>
+          <mat-card-title>Hi {{ appointment.firstName | titlecase }} {{ appointment.lastName |
+            titlecase}},</mat-card-title>
+          <mat-card-subtitle>
+            <h4>Here's your appointment details</h4>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="calendar-option">
+            <a download rel="noopener" target="_blank" mat-button color="primary" [href]="calendarUrl">
+              <span>Add to calendar</span>
+              <mat-icon color="primary">event</mat-icon>
+            </a>
+          </div>
+          <mat-accordion>
+            <mat-expansion-panel hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  When
+                </mat-panel-title>
+                <mat-panel-description>
+                  {{ appointment.timeslot.date | date : 'fullDate' }}, at {{ appointment.timeslot.time }}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="appointment-actions">
+                <button title="Change appointment time" mat-icon-button color="primary" type="button"
+                  (click)="editAppointment(appointment.timeslot.time)">
+                  <mat-icon>
+                    edit
+                  </mat-icon>
+                </button>
+                <button title="Cancel Appointment" mat-icon-button color="warn" type="button"
+                  (click)="deleteAppointment()">
+                  <mat-icon>
+                    delete
+                  </mat-icon>
+                </button>
               </div>
-            </div>
-          </mat-expansion-panel>
-        </mat-accordion>
-      </mat-card-content>
+            </mat-expansion-panel>
+            <mat-expansion-panel *ngIf="context.event.event as event">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Where
+                </mat-panel-title>
+                <mat-panel-description>
+                  {{ event.location.name }} <br />
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="location-details">
+                <address>
+                  {{ event.location.address }} <br />
+                </address>
+                <div class="location-actions">
+                  <a target="_blank" title="Show on google maps" [href]="getMapUrl(event.location.address)">
+                    <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+                      <mat-icon>map</mat-icon>
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-card-content>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </ng-container>
 <ng-template #loading>
   <app-loading></app-loading>
