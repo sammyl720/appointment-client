@@ -3,11 +3,13 @@
     <div class="event-details-wrapper" *ngIf="context.event?.event as event; else noEvent;">
       <div [class.--hide-details]="showForm" class="event-details">
         <app-event-details [event]="event"></app-event-details>
-        <p>You can now schedule a blood donation appointment online</p>
-        <button class="schedule-btn" (click)="toggleFormInView()" [color]="'primary'" mat-fab extended>
-          Schedule Now
-          <mat-icon>schedule</mat-icon>
-        </button>
+        <ng-container *ngIf=" !!(context.available.appointmentsLeft);">
+          <p>You can now schedule a blood donation appointment online</p>
+          <button class="schedule-btn" (click)="toggleFormInView()" [color]="'primary'" mat-fab extended>
+            Schedule Now
+            <mat-icon>schedule</mat-icon>
+          </button>
+        </ng-container>
       </div>
     </div>
     <ng-container *ngIf="!!(context.event?.event) && !!(context.available.appointmentsLeft);">

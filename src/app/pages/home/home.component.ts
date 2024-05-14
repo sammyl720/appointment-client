@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
-import { catchError, filter, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { AppointmentService } from 'src/app/services/appointment/appointment.service';
 import { EventService } from 'src/app/services/event/event.service';
 import { IAppointmentsAvailable, IAppointmentsEvent, IEvent, IEventDetails, isProperApiValue } from 'src/app/types/api.types';
@@ -23,8 +23,7 @@ export class HomeComponent {
     private toastService: HotToastService
   ) {
     this.appointmentContext$ = this.activatedRoute.data.pipe(
-      map(data => ({ event: data['event'], available: (data['available'] ?? [] as IAppointmentsAvailable[]) }))
-    );
+      map(data => ({ event: data['event'], available: (data['available'] ?? [] as IAppointmentsAvailable[]) })));
   }
 
   toggleFormInView() {
