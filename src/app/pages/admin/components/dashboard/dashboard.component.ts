@@ -130,8 +130,17 @@ export class DashboardComponent {
   removePM(time: TIME_SLOT) {
     return time.substring(0, time.indexOf('PM'))
   }
+
   refresh() {
     this.refreshRequests.next(true);
+  }
+
+  clearCache() {
+    this.authService.clearCache().subscribe(wasCleared => {
+      if (wasCleared) {
+        this.refresh();
+      }
+    })
   }
 
   logout() {

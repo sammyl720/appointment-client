@@ -15,6 +15,8 @@
               <mat-icon title="Download list as CSV file" class="action-item"
                 (click)="downloadCSV()">download</mat-icon>
               <mat-icon title="Refresh list" (click)="refresh()" class="refresh-icon action-item">refresh</mat-icon>
+              <mat-icon title="Clear Cache" (click)="clearCache()"
+                class="clear-all-icon action-item">clear_all</mat-icon>
             </div>
           </div>
           <app-appointments-table (onSortChange)="sortChange($event)" [dataSource]="(dataSource$ | async)!"

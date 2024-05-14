@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
-import { BehaviorSubject, catchError, Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, tap, throwError } from 'rxjs';
 import { DashboardComponent } from 'src/app/pages/admin/components/dashboard/dashboard.component';
 import { IAdminContent } from 'src/app/types/api.types';
 import { environment } from 'src/environments/environment';
@@ -101,5 +101,12 @@ export class AuthenticationService {
     this.storageService.removeItem('_gac');
     this.toastService.show('Logged out');
     this.router.navigate(['admin', 'login']);
+  }
+
+  clearCache() {
+    return this.httpClient.get<any>(this.apiUrl + '/admin/clearcache').pipe(
+      map(() => true),
+      catchError(() => of(false))
+    )
   }
 }
