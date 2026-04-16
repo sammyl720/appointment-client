@@ -1,3 +1,8 @@
 <div class="loading-wrapper">
-  <mat-spinner [diameter]="diameter"></mat-spinner>
+  <div class="loading-card">
+    <mat-spinner [diameter]="diameter"></mat-spinner>
+    <h2>{{ title }}</h2>
+    <p *ngIf="subtitle">{{ subtitle }}</p>
+    <div class="loading-pulse"></div>
+  </div>
 </div>
