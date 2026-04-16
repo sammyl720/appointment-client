@@ -7,4 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class LoadingComponent {
   @Input() diameter = 100;
+  @Input() title = 'Loading...';
+  @Input() subtitle = '';
 }
